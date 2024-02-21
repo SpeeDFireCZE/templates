@@ -8,6 +8,15 @@
         "steamcmd +force_install_dir /pufferpanel +login anonymous +app_update 730 +quit"
       ],
       "type": "command"
+    },
+    {
+      "type": "mkdir",
+      "target": "./.steam/sdk64/"
+    },
+    {
+      "type": "move",
+      "source": "/.steam/steamcmd/linux64/steamclient.so",
+      "target": "./.steam/sdk64/"
     }
   ],
   "run": {
