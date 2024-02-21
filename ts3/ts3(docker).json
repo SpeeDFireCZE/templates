@@ -1,0 +1,109 @@
+{
+  "name": "teamspeak3(docker)",
+  "display": "Teamspeak 3 (docker)",
+  "type": "voice",
+  "install": [
+    {
+      "files": [
+        "https://files.teamspeak-services.com/releases/server/${version}/teamspeak3-server_linux_amd64-${version}.tar.bz2"
+      ],
+      "type": "download"
+    },
+    {
+      "commands": [
+        "tar -xjf /pufferpanel/teamspeak3-server_linux_amd64-${version}.tar.bz2 --directory /pufferpanel/",
+        "rm /pufferpanel/teamspeak3-server_linux_amd64-${version}.tar.bz2"
+      ],
+      "type": "command"
+    }
+  ],
+  "run": {
+    "stopCode": 2,
+    "command": "/pufferpanel/teamspeak3-server_linux_amd64/ts3server_minimal_runscript.sh default_voice_port=${vport} query_port=${qport} filetransfer_port=${ftport} voice_ip=${ip} licensepath=${license} license_accepted=${eula}",
+    "workingDirectory": "",
+    "pre": [],
+    "post": [],
+    "environmentVars": {}
+  },
+  "data": {
+    "eula": {
+      "type": "option",
+      "desc": "Do you accept the Teamspeak EULA? 1 = Yes, 0 = No.",
+      "display": "EULA",
+      "required": true,
+      "value": "0",
+      "options": [
+        {
+          "value": "0",
+          "display": "No"
+        },
+        {
+          "value": "1",
+          "display": "Yes"
+        }
+      ]
+    },
+    "ftport": {
+      "type": "integer",
+      "desc": "What Port do you want your file transfer server to run on?",
+      "display": "Port Number",
+      "value": "30033"
+    },
+    "ip": {
+      "type": "string",
+      "desc": "What IP do you want your voice server to run on?",
+      "display": "IP Address",
+      "value": "0.0.0.0"
+    },
+    "license": {
+      "type": "string",
+      "desc": "The absolute path to your license file.",
+      "display": "License Path",
+      "value": ""
+    },
+    "qport": {
+      "type": "string",
+      "desc": "What Port do you want your query server to run on?",
+      "display": "Port Number",
+      "value": "10011"
+    },
+    "version": {
+      "type": "string",
+      "desc": "What version of Teamspeak do you want to use?",
+      "display": "Version",
+      "required": true,
+      "value": "3.13.6"
+    },
+    "vport": {
+      "type": "integer",
+      "desc": "What Port do you want your voice server to run on?",
+      "display": "Port Number",
+      "value": "9987"
+    }
+  },
+  "environment": {
+    "bindings": {},
+    "image": "speedfirecze/generic:latest",
+    "networkMode": "host",
+    "networkName": "",
+    "portBindings": [],
+    "type": "docker"
+  },
+  "supportedEnvironments": [
+    {
+      "bindings": {},
+      "image": "speedfirecze/generic:latest",
+      "networkMode": "host",
+      "networkName": "",
+      "portBindings": [],
+      "type": "docker"
+    }
+  ],
+  "requirements": {
+    "binaries": [
+      "tar"
+    ],
+    "os": "linux",
+    "arch": "amd64"
+  }
+}
